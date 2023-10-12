@@ -1,0 +1,249 @@
+openjdk-21
+import java.util.Random;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Random random = new Random();
+        System.out.println(random.nextInt(10));
+    }
+}
+//////////////
+import java.util.Random;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Random random = new Random();
+        System.out.println(random.nextInt(10,15));
+    }
+}
+/////////
+import java.util.Random;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+
+        System.out.println(generaterandomint());
+    }
+    public static int generaterandomint()
+    {
+        Random random = new Random();
+        return random.nextInt();
+    }
+}
+#######################################
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main
+{
+    public static Random random = new Random();
+
+    public static void main(String[] args)
+    {
+        //int tab[] = {1,2,3,4,5};
+        //Arrays.stream(tab).min().getAsInt();
+
+        //System.out.println(generateRandomGaussian());
+        //generatearr();
+        //avg();
+        //mm();
+        //piramida();
+        //lista();
+        //sum();
+        System.out.println(zera(genzer()));
+    }
+    public static int generateRandomInt()
+    {
+        return random.nextInt();
+    }
+
+    public static double generateRandomDouble()
+    {
+        return random.nextDouble(15,20);
+    }
+
+    public static double generateRandomGaussian()
+    {
+        return random.nextGaussian();
+    }
+
+    public static boolean generateRandomBool()
+    {
+        return random.nextBoolean();
+    }
+
+    public static void generatearr()
+    {
+        int tab[]={1,2,3,4,5,6,7,8,9};
+        for(int i = 8; i>=0; i--)
+        {
+            System.out.println(tab[i]);
+        }
+    }
+
+    public static void avg()
+    {
+        int tab[] = new int[20];
+        for(int i=0;i<20;i++)
+        {
+            tab[i]=random.nextInt(1,100);
+        }
+
+        int wynik = 0;
+        for(int i=0;i<20;i++)
+        {
+            wynik=wynik+tab[i];
+        }
+
+        wynik=wynik/20;
+        System.out.println(wynik);
+    }
+
+    public static void mm()
+    {
+        int tab[] = new int[15];
+        for(int i=0;i<15;i++)
+        {
+            tab[i]=random.nextInt();
+        }
+
+        System.out.println(Arrays.stream(tab).min().getAsInt());
+        System.out.println(Arrays.stream(tab).max().getAsInt());
+    }
+
+    public static void piramida()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("podaj znak");
+        String znak = scanner.next();
+        System.out.println("podaj liczbe");
+        int wysokosc = scanner.nextInt();
+
+        for(int i =0;i<wysokosc; i++)
+        {
+            int liczbaspacji = wysokosc - i -1;
+            int liczbaznakow = 2*i+1;
+            StringBuilder sb = new StringBuilder();
+            while(liczbaspacji-- > 0)
+                sb.append(' ');
+            while(liczbaznakow-- > 0)
+                sb.append(znak);
+            System.out.println(sb.toString());
+        }
+
+    }
+    public static void usun()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("podaj napis");
+        String napis = scanner.next();
+
+        StringBuilder sb = new StringBuilder();
+        for(int i =0; i<napis.length();i++)
+        {
+            char currentChar = napis.charAt(i);
+            if(sb.indexOf(String.valueOf(currentChar))==-1)
+            {
+                sb.append(currentChar);
+            }
+        }
+    }
+
+    public static void odwroc()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("podaj napis");
+        String napis = scanner.next();
+
+        StringBuilder sb = new StringBuilder(napis);
+        sb.reverse();
+
+        System.out.println(sb.toString());
+    }
+
+    public static void lista()
+    {
+        ArrayList<Integer> liczby = new ArrayList<Integer>();
+
+        for(int i = 0; i<15;i++)
+        {
+            liczby.add(random.nextInt(0,50));
+        }
+
+        System.out.println(liczby);
+
+        for(int i=14;i>=0;i--)
+        {
+            System.out.println(liczby.get(i));
+        }
+    }
+
+    public static void sum()
+    {
+        ArrayList<Double> liczby = new ArrayList<Double>();
+
+        for(int i = 0; i<10;i++)
+        {
+            liczby.add(random.nextDouble(0,50));
+        }
+
+        double wynik =0;
+        for(int i=9;i>=0;i--)
+        {
+            wynik=wynik+liczby.get(i);
+        }
+
+        System.out.println(wynik);
+    }
+
+    ArrayList<Double> liczbyOut = new ArrayList<Double>();
+    //liczbyOut.add(2.654);
+    //liczbyOut.add(8.924);
+
+    public static double avg1(ArrayList<Double> liczbyOut)
+    {
+        int n= liczbyOut.size();
+        double wynik=0;
+        for(int i=0;i<n;i++)
+        {
+            wynik=wynik+liczbyOut.get(i);
+        }
+
+        return wynik/n;
+    }
+
+    public static ArrayList<Integer> genzer()
+    {
+        ArrayList<Integer> liczby = new ArrayList<Integer>();
+
+        for(int i = 0; i<5;i++)
+        {
+            liczby.add(random.nextInt(-1,2));
+        }
+
+        System.out.println(liczby);
+        return liczby;
+    }
+    public static int zera(ArrayList<Integer> liczby)
+    {
+        int wynik=0;
+
+        for(int i = 0; i<liczby.size(); i++)
+        {
+            if(liczby.get(i)==0)
+            {
+                wynik=wynik+1;
+            }
+        }
+        System.out.println(wynik);
+        return wynik;
+    }
+}
