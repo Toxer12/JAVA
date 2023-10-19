@@ -1,0 +1,229 @@
+
+public class Main {
+    public static void main(String[] args) {
+
+        House domMichała = new House();
+        domMichała.garage = true;
+        domMichała.garden = false;
+        domMichała.floors = 2;
+        domMichała.area = 150;
+        domMichała.rooms = 6;
+
+        System.out.println(domMichała.getValue());
+
+        House domSylwii = new House();
+        domSylwii.garage = false;
+        domSylwii.garden = true;
+        domSylwii.floors = 2;
+        domSylwii.area = 175;
+        domSylwii.rooms = 4;
+
+        System.out.println(domSylwii.getValue());
+
+     /*   House domKlaudii = domSylwii;
+
+        System.out.println(domKlaudii.getValue());
+
+        domKlaudii.rooms=5;
+        System.out.println(domSylwii.rooms);*/
+
+        Dog mirek = new Dog();
+        mirek.name="mirek";
+        mirek.breed="husky";
+        mirek.age=2;
+        mirek.bark();
+
+        Car auto = new Car();
+        auto.brand = "Fiat";
+        auto.model = "126p";
+        auto.speed = 320;
+        auto.accelerate(7);
+        auto.decelerate(13);
+
+        Time teraz = new Time();
+        teraz.hours=11;
+        teraz.minutes=24;
+
+        Time kiedys = new Time();
+        kiedys.hours = 7;
+        kiedys.minutes = 50;
+
+        System.out.println(teraz.addTime(kiedys).hours);
+        System.out.println(teraz.addTime(kiedys).minutes);
+
+/*        Car1 car =null;
+        System.out.println(car.brand);
+        if(car==null)
+        {
+             System.out.println("nie ma takiego auta");
+        }
+        */ //zepsute
+
+       /* Dog artur = null;
+        artur.bark();*/ //nie ma psa
+
+        Czlowiek Artur = new Czlowiek();
+        Artur.imie = "Artur";
+        Artur.przedstawSie();
+
+        Czlowiek Andrzej = new Czlowiek();
+        Andrzej.imie = "Adam";
+        Artur.powiedzCzesc(Andrzej);
+
+        Artur.zmienImie("Michał");
+        Artur.przedstawSie();
+
+        Artur.zamienImionami(Andrzej);
+        Artur.przedstawSie();
+        Andrzej.przedstawSie();
+
+        Licznik abc = new Licznik();
+        abc.liczba = 7;
+        System.out.println(abc.liczba);
+        abc.zwieksz(4);
+        System.out.println(abc.liczba);
+
+        abc.dodaj = 2;
+        abc.dodaj();
+        System.out.println(abc.liczba);
+
+        int a = 4;
+
+        Zmieniacz zmieniacz = new Zmieniacz();
+        zmieniacz.zmienWartosc(a);
+        System.out.println(a);
+    }
+}
+
+##########################klasy###########################################
+public class House {
+    public int area; //jaka powierzchnia
+    public boolean garage; //czy jest garaz
+    public int rooms; //ile pokoi
+    public boolean garden; //czy jest ogrod
+    public int floors; //ile pieter
+
+    public int getValue()
+    {
+        return area*3000;
+    }
+
+    //this.area pamietaj
+}
+
+class Car {
+    public String brand;
+    public String model;
+    public int speed;
+
+    public void accelerate(int velo)
+    {
+        speed += velo;
+        System.out.println(speed);
+    }
+
+    public void decelerate(int velo)
+    {
+        speed -= velo;
+        System.out.println(speed);
+    }
+}
+
+class Dog {
+    public String name;
+    public String breed;
+    public int age;
+
+    public void bark()
+    {
+        System.out.println("Hau hau");
+    }
+}
+
+class Time {
+    public int hours;
+    public int minutes;
+    public Time addTime(Time other)
+    {
+        Time TimeotherTime = new Time();
+
+        TimeotherTime.hours = (hours + other.hours) % 24;
+        if(other.minutes + minutes > 59)
+        {
+            TimeotherTime.hours++;
+        }
+        TimeotherTime.minutes = (minutes + other.minutes) % 60;
+        return TimeotherTime;
+    }
+}
+
+class Car1 {
+    public String brand;
+}
+
+class Czlowiek {
+    public String imie;
+
+    public void przedstawSie()
+    {
+        System.out.println("Czesc jestem "+imie);
+    }
+
+    public void powiedzCzesc(Czlowiek ktos)
+    {
+        System.out.println("Czesc "+ktos.imie);
+    }
+
+    public void zmienImie(String nowe)
+    {
+        this.imie = nowe;
+    }
+
+    public void zamienImionami(Czlowiek inny)
+    {
+        String t = this.imie;
+        this.imie = inny.imie;
+        inny.imie = t;
+    }
+}
+
+class Licznik {
+    public int liczba;
+    public int dodaj;
+
+    public void zwieksz(int a)
+    {
+        liczba +=a;
+    }
+
+    public void dodaj(Licznik other)
+    {
+        this.liczba += other.liczba;
+    }
+}
+
+class Zmieniacz {
+
+    public int zmienWartosc(int a)
+    {
+        a += 2;
+        return a;
+    }
+}
+##########################################################
+[15:01] Marcin Młyński
+Wykonaj kolejno poniższe czynności:
+Stwórz klasę Licznik z jednym polem liczba. Dodaj do klasy metodę zwieksz, która przyjmuje parametr typu int i zwiększa wartość pola liczba o wartość tego parametru. W klasie Main, utwórz zmienną typu int, przekaż ją do metody zwieksz i sprawdź, czy wartość zmiennej zmieniła się po wywołaniu metody.
+Dodaj do klasy Licznik metodę dodaj, która przyjmuje inny obiekt Licznik i dodaje wartość jego pola liczba do pola liczba bieżącego obiektu. Utwórz dwa obiekty Licznik w klasie Main i użyj metody dodaj. Sprawdź, czy obiekt przekazany jako argument metody dodaj zmienił swoją wartość po wywołaniu metody.
+Stwórz klasę Zmieniacz, która posiada metodę zmienWartosc, która jako argument przyjmuje typ int. Wewnątrz metody zmień wartość argumentu na inną. W klasie Main utwórz zmienną int, a następnie przekaż ją do metody zmienWartosc i sprawdź, czy wartość zmiennej się zmieniła.
+Dodaj do klasy Zmieniacz metodę zmienObiekt, która jako argument przyjmuje obiekt Licznik. Wewnątrz metody zmień wartość pola liczba obiektu Licznik na inną. W klasie Main utwórz obiekt Licznik, a następnie przekaż go do metody zmienObiekt i sprawdź, czy wartość pola liczba obiektu się zmieniła.
+ like 5
+[15:11] Marcin Młyński
+Utwórz klasę Osoba z publicznym polem imie oraz prywatnym polem haslo. Zobacz jak różne modyfikatory dostępu wpływają na dostęp do tych pól z innej klasy.
+ like 4
+[15:19] Marcin Młyński
+Do klasyCar dodaj prywatną metodę blowEngine(). Spróbuj ją wywołać na dowolnym istniejącym obiekcie w innej klasie.
+ like 4
+[15:24] Marcin Młyński
+Stwórz klasę Trener, która jest zadeklarowana jako private. Spróbuj stworzyć obiekt Trener w klasie Main. Jaki jest rezultat?
+ like 2
