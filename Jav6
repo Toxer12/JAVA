@@ -1,0 +1,126 @@
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+/*        Animal a1 = new Animal("Zebra", 1, 13);
+        Animal a2 = new Animal("Zebra", 2, 13);
+        System.out.println(Integer.toHexString(a2.hashCode()) + "\n"
+                + Integer.toHexString(a1.hashCode()));*/
+
+        Person a1 = new Person("Adam", 15);
+        Person a2 = new Person("Adam", -15);
+        System.out.println(a1);
+        System.out.println(a2.age());
+        System.out.println(a1.equals(a2));
+        a2.greet();
+
+        BookDTO b1 = new BookDTO("1984", "Orwell Chyba", 4234, 312);
+        BookDTO b2 = new BookDTO("Harry Potter", "J.K.K", 12, 2000);
+        BookDTO b3 = new BookDTO("Wiesiek", "Nwm", 0, 52);
+
+        Adrdeess ad1 = new Adrdeess("Dolna", 7, 10923, "Allesstein");
+        Person1 p1 = new Person1("Krzyś", "Nierobek", ad1);
+
+        BankAccount ba1 = new BankAccount(349462397);
+        System.out.println(ba1);
+
+        MusicTrack mt1 = new MusicTrack("Chryzantemy", "Miecio");
+        System.out.println(mt1);
+
+        Car c1 = new Car("BMW", "e1", 7.1);
+        c1.fuelCost(6.98, 72.2);
+    }
+}
+#####################################
+import java.util.Objects;
+
+public class Animal
+{
+    String name;
+    int age;
+    double weight;
+
+    public Animal(String name, int age, double weight)
+    {
+        this.name =name;
+        this.age = age;
+        this.weight = weight;
+    }
+    //alt + insert (generator)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return age == animal.age && Double.compare(weight, animal.weight) == 0 && Objects.equals(name, animal.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + age;
+        long doubleToLong = Double.doubleToLongBits(weight);
+        result = 31 * result + (int) (doubleToLong ^ (doubleToLong >>> 32));
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+}
+######################################################
+public record Person(String name, int age)
+{
+    public Person
+    {
+        if(age<0)
+        {
+            age = 0;
+        }
+    }
+    public Person(String name)
+    {
+        this(name, 0);
+    }
+
+    public void greet()
+    {
+        System.out.println("Cześc");
+    }
+}
+record BookDTO(String title, String author, int price, int yearOfPublication)
+{
+
+}
+
+record Adrdeess(String street, int houseNumber, int postalCode, String city)
+{
+
+}
+record Person1(String firtsName, String lastName, Adrdeess adres)
+{
+
+}
+
+record BankAccount(long numerKonta, double saldo)
+{
+    public BankAccount(long numerKonta)
+    {
+        this(numerKonta, 0);
+    }
+}
+
+record MusicTrack(String tytul, String artysta, int czasWSek)
+{
+    public MusicTrack(String tytul, String artysta)
+    {
+        this(tytul, artysta, 180);
+    }
+}
+
+record Car(String brand, String model, double fuelConsumptionPer100km)
+{
+    public void fuelCost(double fuelPrice, double distance)
+    {
+        double wynik =(fuelConsumptionPer100km()/100) * fuelPrice * distance;
+        System.out.println(wynik);
+    }
+}
