@@ -1,0 +1,258 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) throws CloneNotSupportedException
+    {
+/*        ArrayList<Osoba> osobaList= new ArrayList<>();
+        osobaList.add(new Osoba(156.0, 15));
+        osobaList.add(new Osoba(158.0, 15));
+        osobaList.add(new Osoba(156.0, 24));
+        osobaList.add(new Osoba(176.0, 18));
+        System.out.println(osobaList);
+        //Collections.sort(osobaList);
+        osobaList.sort(new OsobaHeightComparator());
+        System.out.println(osobaList);
+
+        ArrayList<Osoba> osobaList2= new ArrayList<>();
+        osobaList2.add(new Osoba(156.0, 15));
+        osobaList2.add(new Osoba(158.0, 15));
+        osobaList2.add(new Osoba(156.0, 24));
+        osobaList2.add(new Osoba(176.0, 18));
+        //Collections.sort(osobaList2, new OsobaAgeComparator());
+        //Collections.sort(osobaList2, new OsobaAgeComparator().reversed());
+        osobaList2.sort(new OsobaAgeComparator());
+        System.out.println(osobaList2);
+
+        Osoba o1 = new Osoba("Stefan", 182,21);
+        Osoba o2 = (Osoba) o1.clone();
+        System.out.println(o1 + " " + o2);
+        o2.age=95;
+        System.out.println(o1 + " " + o2);*/
+        ArrayList<Ksiazka> bookList = new ArrayList<>();
+        bookList.add(new Ksiazka("Ksiaze", 43));
+        bookList.add(new Ksiazka("bryka", 7));
+        bookList.add(new Ksiazka("sdfjl", 432));
+        bookList.add(new Ksiazka("Sapek", 43765));
+        Collections.sort(bookList);
+        System.out.println(bookList);
+
+        ArrayList<Samochod> carList = new ArrayList<>();
+        carList.add(new Samochod("BMW", 23487, 1253));
+        carList.add(new Samochod("AUDI", 23434287, 1853));
+        carList.add(new Samochod("POLONEZ", 9726122, 1999));
+        carList.add(new Samochod("BMW", 429174, 1200));
+        Collections.sort(carList);
+        System.out.println(carList);
+
+        ArrayList<Zamowienie> zList = new ArrayList<>();
+        zList.add(new Zamowienie("mleko", 65, 82.6));
+        zList.add(new Zamowienie("piwo", 14, 82.6));
+        zList.add(new Zamowienie("orzechy", 23, 14.0));
+        zList.add(new Zamowienie("mleko", 6, 2.0));
+        Collections.sort(zList);
+        System.out.println(zList);
+
+        ArrayList<Order> orderList = new ArrayList<>();
+        orderList.add(new Order(3,"Michal", LocalDate.of(1272, 3,25)));
+        orderList.add(new Order(7,"Michal", LocalDate.of(1200, 3,25)));
+        orderList.add(new Order(2,"Michal", LocalDate.of(1942, 2,26)));
+        orderList.add(new Order(4,"Michal", LocalDate.of(1272, 3,25)));
+        orderList.add(new Order(6,"Michal", LocalDate.of(2002, 9,26)));
+        Collections.sort(orderList, new OrderComparator());
+        System.out.println(orderList);
+    }
+}
+##########################################################################################
+import java.time.LocalDate;
+import java.util.Comparator;
+
+public class Osoba implements Comparable<Osoba>, Cloneable {
+    String name;
+    double height;
+    int age;
+
+    public Osoba(String name, double height, int age) {
+        this.name = name;
+        this.height = height;
+        this.age = age;
+    }
+
+    public Osoba(int age) {
+        this.age = age;
+    }
+
+    public Osoba(double height) {
+        this.height = height;
+    }
+
+    public Osoba(double height, int age) {
+        this.height = height;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + height + " " + age + "]";
+    }
+
+    @Override
+    public int compareTo(Osoba o) {
+        //return Double.compare(o.height,this.height);
+        //return (int) Math.signum(o.height - this.height);
+        if (Double.compare(o.height, this.height) == 0) {
+            return Integer.compare(o.age, this.age);
+        }
+        return Double.compare(o.height, this.height);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
+
+    class OsobaHeightComparator implements Comparator<Osoba>
+{
+
+    @Override
+    public int compare(Osoba o1, Osoba o2)
+    {
+        return Double.compare(o2.height, o1.height);
+    }
+}
+
+class OsobaAgeComparator implements Comparator<Osoba>
+{
+
+    @Override
+    public int compare(Osoba o1, Osoba o2) {
+        return Integer.compare(o2.age, o1.age);
+    }
+}
+
+class Ksiazka implements Comparable<Ksiazka>
+{
+    String tytul;
+    int liczbaStron;
+    LocalDate dataWydania;
+
+    @Override
+    public int compareTo(Ksiazka o) {
+        return Integer.compare(o.liczbaStron, this.liczbaStron);
+    }
+
+    public Ksiazka(String tytul, int liczbaStron) {
+        this.tytul = tytul;
+        this.liczbaStron = liczbaStron;
+    }
+
+    @Override
+    public String toString() {
+        return "" + liczbaStron;
+    }
+}
+
+class Samochod implements Comparable<Samochod>
+{
+    String marka;
+    int przebieg;
+    int rokProdukcji;
+
+    @Override
+    public int compareTo(Samochod o) {
+        return Integer.compare(this.przebieg, o.przebieg);
+    }
+
+    @Override
+    public String toString() {
+        return "" + przebieg;
+    }
+
+    public Samochod(String marka, int przebieg, int rokProdukcji) {
+        this.marka = marka;
+        this.przebieg = przebieg;
+        this.rokProdukcji = rokProdukcji;
+    }
+}
+
+class Zamowienie implements Comparable<Zamowienie>
+{
+    String nazwaProduktu;
+    int ilosc;
+    double cenaJednostkowa;
+
+    public Zamowienie(String nazwaProduktu, int ilosc, double cenaJednostkowa) {
+        this.nazwaProduktu = nazwaProduktu;
+        this.ilosc = ilosc;
+        this.cenaJednostkowa = cenaJednostkowa;
+    }
+
+    @Override
+    public String toString() {
+        return "Zamowienie{" +
+                "ilosc=" + ilosc +
+                ", cenaJednostkowa=" + cenaJednostkowa +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Zamowienie o) {
+        if(Double.compare(o.cenaJednostkowa, this.cenaJednostkowa) == 0)
+        {
+            return Integer.compare(this.ilosc, o.ilosc);
+        }
+
+        return Double.compare(o.cenaJednostkowa, this.cenaJednostkowa);
+    }
+}
+
+class Order
+{
+    int id;
+    String customerName;
+    LocalDate orderDate;
+
+    public Order(int id, String customerName, LocalDate orderDate) {
+        this.id = id;
+        this.customerName = customerName;
+        this.orderDate = orderDate;
+    }
+
+    @Override
+    public String toString() {
+        return "" + id + " " + orderDate;
+    }
+}
+
+class OrderComparator implements Comparator<Order>
+{
+
+    @Override
+    public int compare(Order o1, Order o2)
+    {
+        if(o1.orderDate.isBefore(o2.orderDate))
+        {
+            return -1;
+        }
+
+        if(o1.orderDate.isAfter(o2.orderDate))
+        {
+            return 1;
+        }
+
+        return Integer.compare(o1.id, o2.id);
+    }
+}
+############################################################################################
+
+[15:15] Marcin Młyński
+Napisz klasę Song z polami title (typu String), artist (typu String) oraz duration (typu int). Stwórz nową klasę i zaimplementuj w niej interfejs Comparator do porównywania obiektów po polu duration (od najkrótszej do najdłuższej piosenki), 
+a w przypadku równości po polu title. Stwórz tablicę 5 obiektów klasy Song i posortuj ją zgodnie z opisanym kryterium.
+[15:21] Marcin Młyński
+Napisz klasę Student z polami id (typu int), name (typu String) oraz averageGrade (typu double). Zaimplementuj dwie klasy implementujące generyczny interfejs Comparator: AverageGradeComparator do porównywania obiektów po polu averageGrade (od najwyższej 
+do najniższej średniej ocen) oraz IdComparator do porównywania obiektów po polu id (od najniższego do najwyższego identyfikatora). Stwórz listę 5 obiektów klasy Student i posortuj ją zgodnie z oboma kryteriami (najpierw po średniej ocen, a następnie po identyfikatorze).
+[15:22] Marcin Młyński
+Napisz klasę Athlete z dwoma polami: name (String) i lapTimes (lista tablicowa zmiennych typu Integer, reprezentująca czas w sekundach potrzebny na przebiegnięcie okrążenia podczas różnych prób). Zaimplementuj interfejs Cloneable i nadpisz metodę clone(), 
+aby móc klonować obiekty tej klasy. W metodzie main() utwórz obiekt Athlete, sklonuj go, a następnie zmień czas na pozycji 3 oryginalnego sportowca. Wyświetl czasy obu sportowców, aby zobaczyć, czy są niezależne.
