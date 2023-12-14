@@ -1,0 +1,263 @@
+public class Radio implements MusicPlayer
+{
+
+
+    @Override
+    public void turnOn()
+    {
+        System.out.println("Radio włączone");
+    }
+
+    @Override
+    public void turnOff()
+    {
+        System.out.println("Radio wyłączone");
+    }
+
+    @Override
+    public void nextTrack()
+    {
+        System.out.println("Zmieniono stacje radiowa");
+    }
+}
+
+interface MusicPlayer
+{
+    void turnOn();
+    void turnOff();
+    void nextTrack();
+}
+
+interface MediaPlayer
+{
+    void play(String trackName);
+    void pause();
+    String getCurrentTrack();
+}
+
+class AudioPlayer implements MediaPlayer
+{
+    @Override
+    public void play(String trackName)
+    {
+        System.out.println("Teraz gra " + trackName);
+    }
+
+    @Override
+    public void pause()
+    {
+        System.out.println("Zatrzymano odtwarzanie");
+    }
+
+    @Override
+    public String getCurrentTrack()
+    {
+        return "nie wiem";
+    }
+
+}
+
+class VideoPlayer implements MediaPlayer
+{
+    @Override
+    public void play(String trackName)
+    {
+        System.out.println("Teraz gra " + trackName);
+    }
+
+    @Override
+    public void pause()
+    {
+        System.out.println("Zatrzymano odtwarzanie");
+    }
+
+    @Override
+    public String getCurrentTrack()
+    {
+        return "nie wiem";
+    }
+
+}
+
+class MediaPlayerTest
+{
+    /*public static void main(String[] args)
+    {
+        AudioPlayer a1 = new AudioPlayer();
+        a1.play("Myslovitz");
+        a1.pause();
+        System.out.println(a1.getCurrentTrack());
+
+        VideoPlayer v1 = new VideoPlayer();
+        v1.play("Shrek");
+        v1.pause();
+        System.out.println(v1.getCurrentTrack());
+    }*/
+}
+
+interface Storage
+{
+    boolean save(String data);
+    boolean delete(String identifier);
+    String retrieve(String identifier);
+}
+
+class FileStorage implements Storage
+{
+    @Override
+    public boolean save(String data)
+    {
+        if(data.length() < 20)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(String identifier)
+    {
+        if(identifier == null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String retrieve(String identifier)
+    {
+        if(delete(identifier)==true)
+        {
+            return "Nie powodzenie";
+        }
+
+        return "Wykonano";
+    }
+}
+
+class DatabaseStorage implements Storage
+{
+    @Override
+    public boolean save(String data)
+    {
+        if(data.length() < 20)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(String identifier)
+    {
+        if(identifier == null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String retrieve(String identifier)
+    {
+        if(delete(identifier)==true)
+        {
+            return "Nie powodzenie";
+        }
+
+        return "Wykonano";
+    }
+}
+
+class StorageTest
+{
+    /*public static void main(String[] args) {
+        FileStorage f1 = new FileStorage();
+        System.out.println(f1.save("Bruh"));
+        System.out.println(f1.delete(""));
+        System.out.println(f1.retrieve("dag"));
+
+        DatabaseStorage d1 = new DatabaseStorage();
+        System.out.println(d1.save("Brudjgiosukhukahkasffgsfh"));
+        System.out.println(d1.delete("safas"));
+        System.out.println(d1.retrieve(null));
+    }*/
+}
+
+interface VechicleManager
+{
+    String startEngine();
+    int getFuelLevel();
+}
+
+class Car implements VechicleManager
+{
+    @Override
+    public String startEngine()
+    {
+        return "Silnik samochodu uruchomiony";
+    }
+
+    @Override
+    public int getFuelLevel()
+    {
+        return 50;
+    }
+}
+
+class Motorcycle implements VechicleManager
+{
+    @Override
+    public String startEngine()
+    {
+        return "Silnik motocykla uruchomiony";
+    }
+
+    @Override
+    public int getFuelLevel()
+    {
+        return 30;
+    }
+}
+
+class VechicleManagerTest
+{
+    public static void main(String[] args) {
+        Car c1 = new Car();
+        Motorcycle m1 = new Motorcycle();
+        System.out.println(c1.startEngine());
+        System.out.println(c1.getFuelLevel());
+        System.out.println(m1.startEngine());
+        System.out.println(m1.getFuelLevel());
+    }
+}
+
+interface MyComparator
+{
+    int compare(int a, int b);
+}
+
+class TestMyComparator implements MyComparator
+{
+    @Override
+    public int compare(int a, int b)
+    {
+        if(a<b)
+        {
+            return -1;
+        }
+        else if(a==b)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+}
