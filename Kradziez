@@ -1,0 +1,128 @@
+public class TextProcessor implements DataProcessor{
+    @Override
+    public String processData(String data) {
+        String reversedData = new StringBuilder(data).reverse().toString();
+        return reversedData;
+    }
+
+    @Override
+    public boolean isValid(String data) {
+        if(data.equals("") && data == null){
+            return false;
+        }
+        return true;
+    }
+}
+##############################################
+public interface DataProcessor {
+    public String processData(String data);
+    public boolean isValid(String data);
+}
+################################################
+public class NumberProcessor implements DataProcessor{
+    @Override
+    public String processData(String data) {
+        String reversedData = new StringBuilder(data).reverse().toString();
+        return "Processed: " + reversedData;
+    }
+
+    @Override
+    public boolean isValid(String data) {
+        if(data.matches("-?\\d+(\\.\\d+)?")){
+            return true;
+        }
+        return false;
+    }
+}
+##################################################
+public interface Sensor {
+    abstract double readValue();
+    abstract String getStatus();
+    abstract void Reset();
+}
+##################################################
+public class TestDataProcess {
+    public static void main(String[] args) {
+        TextProcessor textProcessor = new TextProcessor();
+        NumberProcessor numberProcessor = new NumberProcessor();
+        System.out.println(textProcessor.processData("JakieśDane"));
+        System.out.println(textProcessor.isValid(""));
+        System.out.println(numberProcessor.processData("768921"));
+        System.out.println(numberProcessor.isValid("5671"));
+    }
+}
+#############################################################
+public class PressureSensor implements  Sensor{
+    double value;
+
+    @Override
+    public double readValue() {
+        return value*10;
+    }
+
+    @Override
+    public String getStatus() {
+        return "Nacisk wynosi: " + value*10;
+    }
+
+    @Override
+    public void Reset() {
+        this.value = value/10;
+    }
+}
+#######################################################
+public class SensorTest {
+    public static void main(String[] args){
+        TemparatureSensor temparatureSensor = new TemparatureSensor(44.2);
+        System.out.println(temparatureSensor.getStatus());
+        temparatureSensor.Reset();
+        System.out.println(temparatureSensor.readValue());
+        PressureSensor  pressureSensor = new PressureSensor()
+
+
+    }
+}
+#########################################
+public class TemparatureSensor implements  Sensor{
+    public TemparatureSensor(double value) {
+        this.value = value;
+    }
+
+    double value;
+    @Override
+    public double readValue() {
+        return value;
+    }
+
+    @Override
+    public String getStatus() {
+        return "Temperatura wynosi: " + value;
+    }
+
+    @Override
+    public void Reset() {
+     this.value = 0;
+    }
+}
+#####################################################
+public class TestAuthentiacion {
+    public static void main(String[] args){
+        UserAuthentiacion user = new UserAuthentiacion("user","Hasło");
+        AdminAuthentication admin = new AdminAuthentication("Admin","hasłoAdmina");
+        System.out.println(user.login("user","Hasło"));
+        user.logout();
+        System.out.println( admin.resetPassword("hasłoAdmina","hasłoAdmdsdina","sdsdsdsd"));
+    }
+}
+#########################################################
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitespace characters in your code.
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.makeNoise();
+        TestMyComparator comparator = new TestMyComparator();
+        System.out.println(comparator.compare(4,2));
+
+    }
+}
