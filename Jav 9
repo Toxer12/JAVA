@@ -1,0 +1,435 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitespace characters in your code.
+public class Main {
+    public static void main(String[] args) {
+
+
+
+   /*       Koncert koncert = new Koncert();
+            BramkaNaAutostradzie bramkaNaAutostradzie = new BramkaNaAutostradzie();
+            koncert.wystawBilet();
+            bramkaNaAutostradzie.wystawBilet();*/
+
+/*        KierownikWycieczki kierownik = new KierownikWycieczki(new Koncert());
+        kierownik.ogarnijBilet();
+        kierownik = new KierownikWycieczki(new LotMiedzynarodowe());
+        kierownik.ogarnijBilet();
+        kierownik = new KierownikWycieczki(new BramkaNaAutostradzie());
+        kierownik.ogarnijBilet();*/
+
+        Biuro biuro = new Biuro(new StandardowyPrinter());
+        biuro.drukujDokument("Bruh");
+
+        Samochod samochod = new Samochod(new BenzynowySilnik());
+        samochod.start();
+        samochod.stop();
+
+        Uzytkownik uzytkownik = new Uzytkownik(new Email());
+        uzytkownik.powiadomOModernizacji("Zostałeś zwiolniony");
+
+        Osoba osoba = new Osoba(new Czlowiek());
+
+        try
+        {
+            osoba.CheckAge(17);
+            osoba.CheckAge(18);
+            osoba.CheckAge(27);
+            osoba.CheckAge(-3);
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println("za mlody");
+        }
+
+        Sprawdz sprawdz = new Sprawdz();
+
+        try
+        {
+            sprawdz.sprawdzFormatDanych("ok");
+        }
+        catch(NiepoprawnyFormatDanychException e)
+        {
+            System.out.println("Głupiś");
+        }
+
+    }
+}
+##############################################################
+public interface Biletomat {
+    public void wystawBilet();
+}
+
+interface Printer
+{
+    public void drukuj(String text);
+}
+
+interface Silnik
+{
+    public void uruchom();
+    public void zatrzymaj();
+}
+
+interface Powiadomienie
+{
+    public void wyslij(String wiadomosc);
+}
+
+interface CheckAge
+{
+    public void wiek(int age);
+}
+#####################################################
+public class Koncert implements Biletomat
+{
+    @Override
+    public void wystawBilet()
+    {
+        System.out.println("bilet wystawiony");
+    }
+}
+
+class BramkaNaAutostradzie implements Biletomat
+{
+    @Override
+    public void wystawBilet()
+    {
+        System.out.println("bilet wystawiony");
+    }
+}
+
+class LotMiedzynarodowe implements Biletomat
+{
+    @Override
+    public void wystawBilet()
+    {
+        System.out.println("bilet wystawiony");
+    }
+}
+class KierownikWycieczki
+{
+    private final Biletomat biletomat;
+
+    public KierownikWycieczki(Biletomat biletomat)
+    {
+        this.biletomat=biletomat;
+    }
+
+    public void ogarnijBilet()
+    {
+        biletomat.wystawBilet();
+    }
+}
+
+class StandardowyPrinter implements Printer
+{
+    @Override
+    public void drukuj(String text)
+    {
+        System.out.println(text);
+    }
+}
+
+class Biuro
+{
+    private final Printer printer;
+
+    public Biuro(Printer printer)
+    {
+        this.printer=printer;
+    }
+
+    public void drukujDokument(String tekst)
+    {
+        printer.drukuj(tekst);
+    }
+}
+
+class BenzynowySilnik implements Silnik
+{
+    @Override
+    public void uruchom()
+    {
+        System.out.println("ŁUTUTUTUTUTU");
+    }
+
+    @Override
+    public void zatrzymaj()
+    {
+        System.out.println("Zgrzyt");
+    }
+}
+
+
+class Samochod
+{
+    private final Silnik silnik;
+
+    public Samochod(Silnik silnik)
+    {
+        this.silnik = silnik;
+    }
+
+    public void start()
+    {
+        silnik.uruchom();
+    }
+
+    public void stop()
+    {
+        silnik.zatrzymaj();
+    }
+}
+
+class Email implements Powiadomienie
+{
+    @Override
+    public void wyslij(String wiadomosc)
+    {
+        System.out.println(wiadomosc);
+    }
+}
+
+class Uzytkownik
+{
+    private final Powiadomienie powiadomienie;
+
+    public Uzytkownik(Powiadomienie powiadomienie)
+    {
+        this.powiadomienie=powiadomienie;
+    }
+
+    public void powiadomOModernizacji(String informacja)
+    {
+        powiadomienie.wyslij(informacja);
+    }
+}
+
+class Czlowiek implements CheckAge
+{
+    @Override
+    public void wiek(int age) throws IllegalArgumentException
+    {
+        if(age>=18)
+        {
+            System.out.println("Wiek sie zgadza");
+        }
+        else
+        {
+            throw new IllegalArgumentException("wiek sie nie zgadza");
+
+        }
+    }
+}
+
+class Osoba
+{
+    private final CheckAge checkAge;
+
+    public Osoba(CheckAge checkAge)
+    {
+        this.checkAge = checkAge;
+    }
+
+    public void CheckAge(int age)
+    {
+        checkAge.wiek(age);
+    }
+}
+
+class NiepoprawnyFormatDanychException extends Exception
+{
+
+}
+
+class Sprawdz
+{
+    public void sprawdzFormatDanych(String dane)throws NiepoprawnyFormatDanychException
+    {
+        if(dane.length()<3)
+        {
+            throw new NiepoprawnyFormatDanychException();
+        }
+        else
+        {
+            System.out.println("Bangla");
+        }
+    }
+}
+/////////////////////
+public class Koncert implements Biletomat
+{
+    @Override
+    public void wystawBilet()
+    {
+        System.out.println("bilet wystawiony");
+    }
+}
+
+class BramkaNaAutostradzie implements Biletomat
+{
+    @Override
+    public void wystawBilet()
+    {
+        System.out.println("bilet wystawiony");
+    }
+}
+
+class LotMiedzynarodowe implements Biletomat
+{
+    @Override
+    public void wystawBilet()
+    {
+        System.out.println("bilet wystawiony");
+    }
+}
+class KierownikWycieczki
+{
+    private final Biletomat biletomat;
+
+    public KierownikWycieczki(Biletomat biletomat)
+    {
+        this.biletomat=biletomat;
+    }
+
+    public void ogarnijBilet()
+    {
+        biletomat.wystawBilet();
+    }
+}
+
+class StandardowyPrinter implements Printer
+{
+    @Override
+    public void drukuj(String text)
+    {
+        System.out.println(text);
+    }
+}
+
+class Biuro
+{
+    private final Printer printer;
+
+    public Biuro(Printer printer)
+    {
+        this.printer=printer;
+    }
+
+    public void drukujDokument(String tekst)
+    {
+        printer.drukuj(tekst);
+    }
+}
+
+class BenzynowySilnik implements Silnik
+{
+    @Override
+    public void uruchom()
+    {
+        System.out.println("ŁUTUTUTUTUTU");
+    }
+
+    @Override
+    public void zatrzymaj()
+    {
+        System.out.println("Zgrzyt");
+    }
+}
+
+
+class Samochod
+{
+    private final Silnik silnik;
+
+    public Samochod(Silnik silnik)
+    {
+        this.silnik = silnik;
+    }
+
+    public void start()
+    {
+        silnik.uruchom();
+    }
+
+    public void stop()
+    {
+        silnik.zatrzymaj();
+    }
+}
+
+class Email implements Powiadomienie
+{
+    @Override
+    public void wyslij(String wiadomosc)
+    {
+        System.out.println(wiadomosc);
+    }
+}
+
+class Uzytkownik
+{
+    private final Powiadomienie powiadomienie;
+
+    public Uzytkownik(Powiadomienie powiadomienie)
+    {
+        this.powiadomienie=powiadomienie;
+    }
+
+    public void powiadomOModernizacji(String informacja)
+    {
+        powiadomienie.wyslij(informacja);
+    }
+}
+
+class Czlowiek implements CheckAge
+{
+    @Override
+    public void wiek(int age) throws IllegalArgumentException
+    {
+        if(age>=18)
+        {
+            System.out.println("Wiek sie zgadza");
+        }
+        else
+        {
+            throw new IllegalArgumentException("wiek sie nie zgadza");
+
+        }
+    }
+}
+
+class Osoba
+{
+    private final CheckAge checkAge;
+
+    public Osoba(CheckAge checkAge)
+    {
+        this.checkAge = checkAge;
+    }
+
+    public void CheckAge(int age)
+    {
+        checkAge.wiek(age);
+    }
+}
+
+class NiepoprawnyFormatDanychException extends Exception
+{
+
+}
+
+class Sprawdz
+{
+    public void sprawdzFormatDanych(String dane)throws NiepoprawnyFormatDanychException
+    {
+        if(dane.length()<3)
+        {
+            throw new NiepoprawnyFormatDanychException();
+        }
+        else
+        {
+            System.out.println("Bangla");
+        }
+    }
+}
