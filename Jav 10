@@ -1,0 +1,140 @@
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Box<String, Integer> box = new Box<>("NUH UH", 26);
+        Box<Integer, String> box2 = new Box<>(67, "BRUH");
+        Box<Integer, Integer> box3 = new Box<>(67, 3);
+        wypisz(4);
+        wypisz("Siema");
+        System.out.println(isEqual(7,7));
+        System.out.println(isEqual("Nie","Tak"));
+        Triple<Integer, Double, Boolean> tri = new Triple<>(7,23.5,true);
+        tri.getFirst();
+        tri.getSecond();
+        tri.getThird();
+        Integer[] myArray={7,4,21,5};
+        list(myArray);
+        swap(myArray,2,3);
+        list(myArray);
+        swap(myArray,7,2);
+        list(myArray);
+        System.out.println(maxValue(myArray));
+        Float[] tab = {32F,2F, 54.1F,2.2F,0.1F};
+        System.out.println(maxValue(tab));
+        String[] mate = {"uga buga","ashd","a"," ","■bÜČ řŘű☺☻♥♦"};
+        System.out.println(maxValue(mate));
+        Vechicle[] vec = {new Vechicle("skdaj",23), new Vechicle("skoda",92), new Vechicle("▬▬▬",2), new Vechicle("↨↑↓→←∟↔▲▼ !",100)};
+        System.out.println(maxValue(vec));
+    }
+    public static <T> void wypisz(T val)
+    {
+        System.out.println(val);
+    }
+
+    public static <T> boolean isEqual(T val, T val2)
+    {
+        return val == val2;
+    }
+
+    public static <T> T[] swap(T[] val, int a, int b)
+    {
+        if(a > val.length || b > val.length)
+        {
+            return val;
+        }
+
+        T temp;
+        temp = val[a];
+        val[a]=val[b];
+        val[b]=temp;
+        return val;
+    }
+    public static void list(Integer[] a)
+    {
+        for(int x: a)
+        {
+            System.out.print(x + " ");
+
+        }
+        System.out.println();
+    }
+
+    public static <T extends Comparable<T>> T maxValue(T[] tab)
+    {
+        if(tab == null)
+        {
+            return null;
+        }
+        Arrays.sort(tab, Collections.reverseOrder());
+        return tab[0];
+    }
+}
+############################################
+public class Box <T,U>
+{
+    T value;
+    U value2;
+    public Box(T value, U value2)
+    {
+        this.value = value;
+        this.value2 = value2;
+    }
+}
+
+class Triple <T,U,V>
+{
+    T val;
+    U val2;
+    V val3;
+
+    public Triple(T val, U val2, V val3)
+    {
+        this.val = val;
+        this.val2 = val2;
+        this.val3 = val3;
+    }
+
+    public void getFirst()
+    {
+        System.out.println(val);
+    }
+
+    public void getSecond()
+    {
+        System.out.println(val2);
+    }
+
+    public void getThird()
+    {
+        System.out.println(val3);
+    }
+
+
+}
+class Vechicle implements Comparable<Vechicle>
+{
+    String model;
+    int speed;
+    public Vechicle(String model, int speed)
+    {
+        this.model=model;
+        this.speed=speed;
+    }
+    @Override
+    public int compareTo(Vechicle o) {
+        return Integer.compare(this.speed, o.speed);
+    }
+
+    @Override
+    public String toString() {
+        return "Vechicle{" +
+                "model='" + model + '\'' +
+                ", speed=" + speed +
+                '}';
+    }
+}
