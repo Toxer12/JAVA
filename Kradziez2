@@ -1,0 +1,105 @@
+package zad5;
+
+import java.util.Date;
+
+public class Smartphone implements Cloneable{
+    public Smartphone(String brand, String model, Date productionDate) {
+        this.brand = brand;
+        this.model = model;
+        this.productionDate = productionDate;
+    }
+
+    String brand;
+    String model;
+    Date productionDate;
+    @Override
+    public String toString(){
+        return "brand: " + brand + " model: " + model + " productionDate: " + productionDate;
+    }
+
+
+    @Override
+    public Smartphone clone() {
+        try {
+            Smartphone clone = (Smartphone) super.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+}
+
+
+package zad7;
+
+public class Main {
+    public static void main(String[] args) {
+
+    }
+    public <T extends Animal> findMax(T element1,T element2){
+        T max;
+        if(element1.compareTo(element1) > 0){
+            max = element1;
+        }
+        max = element2;
+        return max;
+    }
+}
+
+
+package zad7;
+
+public class Animal implements Comparable<Animal>{
+    int age;
+    String name;
+
+    public Animal(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    @Override
+    public int compareTo(Animal o) {
+        return Integer.compare(this.age,o.age);
+    }
+}
+
+
+package zad7;
+
+public class Dog extends Animal{
+    public Dog(int age,String name) {
+        super(age,name);
+    }
+}
+
+
+package zad4;
+
+import java.util.Comparator;
+import java.util.Date;
+
+public class Book {
+    public Book(String tytul, double cena, Date datawydania) {
+        this.tytul = tytul;
+        this.cena = cena;
+        this.datawydania = datawydania;
+    }
+
+    String tytul;
+    double cena;
+    Date datawydania;
+    @Override
+    public String toString(){
+        return "tytul: " + tytul + " cena: " + cena + " data wydania: " + datawydania;
+    }
+
+
+}
+class DateComparator implements Comparator<Book>{
+
+    @Override
+    public int compare(Book o1, Book o2) {
+        return o1.datawydania.compareTo(o2.datawydania);
+    }
+}
