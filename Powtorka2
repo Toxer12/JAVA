@@ -1,1 +1,65 @@
+import java.util.Scanner;
 
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        try
+        {
+            sprawdzFormatDanych("");
+        }
+        catch(NiepoprawnyFormatDanychException x1)
+        {
+            System.out.println("bylo puste");
+        }
+    }
+
+    public static void sprawdzFormatDanych(String dane) throws NiepoprawnyFormatDanychException
+    {
+        if(dane.isEmpty())
+        {
+            throw new NiepoprawnyFormatDanychException("pusty");
+        }
+    }
+}
+
+#########################################
+
+public class NiepoprawnyFormatDanychException extends Exception
+{
+
+    public NiepoprawnyFormatDanychException(String a)
+    {
+        super(a);
+    }
+
+    public NiepoprawnyFormatDanychException()
+    {
+        super();
+    }
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Napisz klasę Product, która zawiera pola: name (typu String), price (typu double) i productionYear (typu int). 
+Zaimplementuj interfejs Comparable w taki sposób, aby obiekty klasy Product były sortowane rosnąco według daty produkcji. 
+Stwórz listę tablicową 5 obiektów klasy Product i posortuj ją według sprecyzowanego kryterium.
+//////////
+Napisz klasę Person z polami firstName (typu String), lastName (typu String) oraz birthYear (typu int). 
+Zaimplementuj dwie klasy implementujące generyczny interfejs Comparator: LastNameComparator do porównywania obiektów po polu lastName (alfabetycznie od A do Z) oraz BirthDateComparator do porównywania 
+obiektów po polu birthYear (od najstarszej do najmłodszej osoby). Stwórz tablicę 5 obiektów klasy Person i posortuj ją zgodnie z oboma kryteriami (najpierw po nazwisku, a następnie przy równości po dacie urodzenia).
+////////////
+Napisz klasę Person z polami firstName (typu String), lastName (typu String) oraz birthYear (typu int). 
+Zaimplementuj dwie klasy implementujące generyczny interfejs Comparator: LastNameComparator do porównywania obiektów po polu lastName 
+(alfabetycznie od A do Z) oraz BirthDateComparator do porównywania obiektów po polu birthYear (od najstarszej do najmłodszej osoby). 
+Stwórz tablicę 5 obiektów klasy Person i posortuj ją zgodnie z oboma kryteriami (najpierw po nazwisku, a następnie przy równości po dacie urodzenia).
+////////
+Napisz klasę Product, która zawiera pola: name (typu String), price (typu double) i productionYear (typu int). 
+Zaimplementuj interfejs Comparable w taki sposób, aby obiekty klasy Product były sortowane rosnąco według daty produkcji. Stwórz listę tablicową 5 obiektów klasy Product i posortuj ją według sprecyzowanego kryterium.
+//////////////////////////
+Wykonaj poniższe czynności:
+Stwórz interfejs Powiadomienie z metodą wyślij(String wiadomość).
+Utwórz klasę Email, która implementuje Powiadomienie i symuluje wysyłanie wiadomości e-mail.
+Utwórz klasę Użytkownik, która posiada prywatne pole typu Powiadomienie. 
+W konstruktorze przyjmij Powiadomienie jako argument. Dodaj metodę powiadomOModernizacji(String informacja), która będzie delegować zadanie wysyłania powiadomienia do obiektu klasy Powiadomienie.
